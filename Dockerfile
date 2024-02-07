@@ -23,3 +23,12 @@ COPY scripts/ scripts/
 COPY Taskfile.yaml Taskfile.yaml
 COPY .env .env
 
+ENTRYPOINT ["/usr/bin/task"]
+
+FROM assemble as assembler
+RUN task build
+
+FROM busybox as release
+WORKDIR /opt/app
+COPY --from=build /opt/app/build/cv.html cv.html
+VOLUME /opt/app
