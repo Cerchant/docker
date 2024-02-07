@@ -30,5 +30,5 @@ RUN task build
 
 FROM busybox as release
 WORKDIR /opt/app
-COPY --from=build /opt/app/build/cv.html cv.html
+COPY --from=assemble /opt/app/build/cv.html cv.html
 VOLUME /opt/app
